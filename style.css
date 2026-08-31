@@ -1,0 +1,43 @@
+:root{
+  --bg:#08070b; --panel:#0f0e14; --ink:#e9e6f2; --muted:#7d7791;
+  --accent:#c9b8ff; --line:#1a1723;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased; display:flex; flex-direction:column; min-height:100vh;
+}
+a{color:var(--accent)}
+.wrap{width:min(760px,90vw);margin-inline:auto}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:14px;padding:18px 0}
+header svg{flex:none}
+header .name{font-weight:600;letter-spacing:-.01em;margin-right:auto}
+header nav{display:flex;gap:20px;font-size:.9rem}
+header nav a{color:var(--muted);text-decoration:none}
+header nav a:hover{color:var(--accent)}
+main{flex:1 0 auto;padding:56px 0 72px}
+h1{font-size:clamp(1.9rem,5vw,2.8rem);letter-spacing:-.03em;margin:0 0 8px;font-weight:600}
+h2{font-size:1.15rem;margin:38px 0 10px;letter-spacing:-.01em}
+h3{font-size:1rem;margin:24px 0 6px;color:var(--ink)}
+p,li{color:var(--muted)}
+p{margin:0 0 14px}
+ul{margin:0 0 14px;padding-left:1.15em}
+li{margin-bottom:6px}
+strong{color:var(--ink);font-weight:600}
+.lede{font-size:1.05rem;color:var(--muted);max-width:60ch}
+.updated{font-size:.85rem;color:#5d5872;margin:0 0 32px}
+.summary{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin:0 0 36px}
+.summary p:last-child{margin-bottom:0}
+table{width:100%;border-collapse:collapse;margin:0 0 18px;font-size:.94rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--ink);font-weight:600;width:38%}
+td{color:var(--muted)}
+footer{flex:none;border-top:1px solid var(--line);padding:28px 0 44px;font-size:.86rem;color:var(--muted)}
+footer .cols{display:flex;flex-wrap:wrap;gap:28px 56px;margin-bottom:26px}
+footer h4{margin:0 0 10px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#5d5872;font-weight:600}
+footer a{color:var(--muted);text-decoration:none;display:block;margin-bottom:6px}
+footer a:hover{color:var(--accent)}
+.legal{color:#5d5872;font-size:.78rem;letter-spacing:.03em}
