@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Use — Backgammon by Arcane Void</title>
+<meta name="description" content="Terms of use for Backgammon and Backgammon Pro by Arcane Void LLC.">
+<link rel="icon" href="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#c9b8ff" stroke-width="7"/>
+      <circle cx="50" cy="50" r="7" fill="#c9b8ff"/>
+    </svg>
+    <span class="name">Arcane Void · Backgammon</span>
+    <nav>
+      <a href="/backgammon/privacy.html">Privacy</a>
+      <a href="/backgammon/terms.html">Terms</a>
+      <a href="/backgammon/support.html">Support</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <h1>Backgammon Terms of Use</h1>
+    <p class="updated">Effective 4 September 2026 · Arcane Void LLC</p>
+
+    <div class="summary">
+      <p><strong>The short version.</strong> Backgammon is a game played against a program on your device. There is no wagering, no currency to buy, and no way to spend money on a better position. The dice are committed before each game starts and revealed after it ends, so either side can check them.</p>
+    </div>
+
+    <h2>1. Agreement</h2>
+    <p>These terms govern your use of Backgammon and Backgammon Pro (the "Software"), published by Arcane Void LLC ("we", "us"). Installing or using the Software means you accept them. If you do not, uninstall it.</p>
+    <p>The <a href="/backgammon/privacy.html">Backgammon privacy policy</a> describes what the Software stores and what the free edition's advertising sends.</p>
+
+    <h2>2. The two editions</h2>
+    <p><strong>Backgammon</strong> is free and shows advertising. <strong>Backgammon Pro</strong> is bought once through Google Play, shows no advertising, and adds the higher opponents, the doubling cube, match play and post-game analysis.</p>
+    <p>They are separate applications with separate Play listings. Buying Pro does not remove the advertising from the free edition, and the two do not share their saved games or statistics.</p>
+
+    <h2>3. Purchases and refunds</h2>
+    <p>Backgammon Pro is sold and billed by Google Play under Google's terms. Google handles payment, renewal where applicable, and refunds; we hold no payment details. If Google refuses a refund you believe you are owed, write to us and we will tell you what we can see and what we cannot.</p>
+
+    <h2>4. The dice</h2>
+    <p>Before each game the Software draws a 32-byte seed from the device's cryptographic random source and seals it, showing you the seal before you spin. Your spin of the dial becomes a salt. The commitment for the game is SHA-256 of the seed and the salt together, and roll <em>t</em> is derived from HMAC-SHA-256 of the seed over the salt and <em>t</em>, read as two dice by rejection sampling so that every face is equally likely.</p>
+    <p>We warrant that within a game:</p>
+    <ul>
+      <li>Every roll is fixed before the first checker moves, and the commitment shown to you binds it.</li>
+      <li>The opponent program receives a roll only when you do. It is never given the seed, the salt, or a future roll, and no roll is chosen, redrawn or weighted by the level you selected or by who is ahead.</li>
+      <li>The seed is revealed when the game ends, so every roll and both hashes can be recomputed and checked independently.</li>
+    </ul>
+    <p>Lessons are the exception, and the Software says so where they are played: a lesson's dice are scripted to demonstrate a rule. Every ordinary game uses the committed dice described above.</p>
+
+    <h2>5. No gambling</h2>
+    <p>The Software offers no wagering, no stake, no prize, and no currency of any kind. The doubling cube multiplies the points of the game being played and nothing else. Nothing you buy affects a position, a roll, or a result.</p>
+
+    <h2>6. Opponent levels</h2>
+    <p>The opponent levels describe measured playing strength — the average error the program makes per decision against a reference — and not a human rating from any federation or club. A level is a description of the program's play, not a promise about yours.</p>
+
+    <h2>7. Advertising in the free edition</h2>
+    <p>Advertisements in the free edition are selected and served by Google. We choose where an advertisement can appear and we do not choose which one you see. If you are shown something deceptive, illegal or plainly unsuitable, write to us with a screenshot: we cannot block that advertiser directly, but we report it and we can change the placement.</p>
+
+    <h2>8. Licence</h2>
+    <p>We grant you a personal, non-exclusive, non-transferable, revocable licence to use the Software on devices you control, for your own non-commercial use. You may not resell it, rent it, run it as a paid service, reverse engineer it except where law permits regardless of contract, or remove any notice from it. Using the Software to train a competing engine, or to operate a bot in another service, is outside this licence.</p>
+
+    <h2>9. Availability</h2>
+    <p>The Software is provided as it is. We may change it, or stop publishing it, at any time. We do not promise it will be uninterrupted or free of defects. It runs entirely on your device, so a version already installed keeps working whatever we publish afterwards.</p>
+
+    <h2>10. Disclaimer and liability</h2>
+    <p>To the fullest extent the law allows, the Software is provided "as is" and "as available", without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. Section 4 is the exception: it is a warranty and we stand behind it.</p>
+    <p>To the fullest extent the law allows, Arcane Void LLC is not liable for indirect, incidental, special, consequential or exemplary damages, or for loss of profits or data, arising from your use of the Software. Where liability cannot be excluded, it is limited to the greater of the amount you paid us in the twelve months before the claim, or ten United States dollars.</p>
+    <p>Some jurisdictions do not allow certain exclusions or limitations. Where that is so, the above applies only as far as that jurisdiction permits, and nothing here limits liability for death or personal injury caused by negligence, or for fraud.</p>
+
+    <h2>11. Intellectual property</h2>
+    <p>The Software, its engine, its artwork and its text are owned by Arcane Void LLC and protected by copyright and other law. These terms grant you a licence to use the Software and nothing more.</p>
+    <p>Some sound effects and avatar artwork are third-party works used under the Creative Commons CC0 1.0 dedication, and are credited on the <a href="/backgammon/support.html#credits">support page</a>.</p>
+
+    <h2>12. Governing law</h2>
+    <p>These terms are governed by the laws of the United States of America and of the state in which Arcane Void LLC is organised, without regard to conflict-of-law principles. The courts of that state have exclusive jurisdiction over any dispute arising from them.</p>
+
+    <h2>13. Changes</h2>
+    <p>We may revise these terms. When we do, we will change the effective date above. Continuing to use the Software after a revision means you accept it.</p>
+
+    <h2>14. Contact</h2>
+    <p>Questions about these terms: <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Backgammon</h4>
+        <a href="/backgammon/privacy.html">Privacy Policy</a>
+        <a href="/backgammon/terms.html">Terms of Use</a>
+        <a href="/backgammon/support.html">Support</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/">Arcane Void</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>
+      </div>
+    </div>
+    <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
