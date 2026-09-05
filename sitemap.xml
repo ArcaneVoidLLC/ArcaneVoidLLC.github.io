@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url><loc>https://arcanevoid.com/</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://arcanevoid.com/privacy.html</loc><lastmod>2026-09-02</lastmod></url>
+  <url><loc>https://arcanevoid.com/terms.html</loc><lastmod>2026-09-02</lastmod></url>
+  <url>
+    <loc>https://arcanevoid.com/backgammon/</loc>
+    <lastmod>2026-09-04</lastmod>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/og.png</image:loc></image:image>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/game.webp</image:loc></image:image>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/dice.webp</image:loc></image:image>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/home.webp</image:loc></image:image>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/lesson.webp</image:loc></image:image>
+    <image:image><image:loc>https://arcanevoid.com/backgammon/media/two.webp</image:loc></image:image>
+  </url>
+  <url><loc>https://arcanevoid.com/backgammon/verify.html</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://arcanevoid.com/backgammon/support.html</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://arcanevoid.com/backgammon/privacy.html</loc><lastmod>2026-09-04</lastmod></url>
+  <url><loc>https://arcanevoid.com/backgammon/terms.html</loc><lastmod>2026-09-04</lastmod></url>
+</urlset>

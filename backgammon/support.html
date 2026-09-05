@@ -18,23 +18,25 @@
     </svg>
     <span class="name">Arcane Void · Backgammon</span>
     <nav>
+      <a href="/backgammon/">Overview</a>
+      <a href="/backgammon/verify.html">Verify</a>
+      <a href="/backgammon/support.html">Support</a>
       <a href="/backgammon/privacy.html">Privacy</a>
       <a href="/backgammon/terms.html">Terms</a>
-      <a href="/backgammon/support.html">Support</a>
     </nav>
   </div>
 </header>
 <main>
   <div class="wrap">
     <h1>Backgammon Support</h1>
-    <p class="updated">Arcane Void LLC · <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a></p>
+    <p class="updated">Arcane Void LLC · support and suggestions: <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span></p>
 
     <div class="summary">
-      <p><strong>Write to <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>.</strong> A person reads every message. Tell us your device, your Android version, which edition you have, and what happened — we answer faster when we do not have to ask.</p>
+      <p><strong>Write to <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>.</strong> A person reads every message. Tell us your device, your Android version, which edition you have, and what happened — we answer faster when we do not have to ask.</p>
     </div>
 
     <h2>The dice are wrong</h2>
-    <p>They are checkable, so check them. Open the dice sheet from the plaque on the home screen or in a game. Before the game it shows the seal and the commitment. When the game ends it reveals the seed, recomputes every roll of that game, and tells you whether all of them, the seal and the commitment match.</p>
+    <p>They are checkable, so check them. Open the dice sheet from the plaque on the home screen or in a game. Before the game it shows the seal and the commitment. When the game ends it reveals the seed, recomputes every roll of that game, and tells you whether all of them, the seal and the commitment match. To check without trusting the app, paste the revealed seed and salt into <a href="/backgammon/verify.html">the verifier on this site</a>, or run <a href="/backgammon/verify_dice.py">verify_dice.py</a> yourself.</p>
     <p>A run of doubles against you is not evidence of anything. Over a few hundred rolls, one double in six and about eight pips a roll is what a fair die gives, and swings either way are ordinary. If the ledger ever reports a roll that does not match the seed, keep that game record and send it to us: that is a defect and we want it.</p>
 
     <h2>I bought Pro and still see advertisements</h2>
@@ -70,9 +72,11 @@
     <div class="cols">
       <div>
         <h4>Backgammon</h4>
+        <a href="/backgammon/">Overview</a>
+        <a href="/backgammon/verify.html">Verify your dice</a>
+        <a href="/backgammon/support.html">Support</a>
         <a href="/backgammon/privacy.html">Privacy Policy</a>
         <a href="/backgammon/terms.html">Terms of Use</a>
-        <a href="/backgammon/support.html">Support</a>
       </div>
       <div>
         <h4>Company</h4>
@@ -82,11 +86,20 @@
       </div>
       <div>
         <h4>Contact</h4>
-        <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>
+        <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>
       </div>
     </div>
     <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
   </div>
 </footer>
+<script>
+/* Addresses are assembled here rather than written into the page, so
+   scrapers reading the HTML do not get them. */
+document.querySelectorAll('span.em').forEach(function(s){
+  var a=s.dataset.u+'@'+s.dataset.d+'.'+s.dataset.t;
+  var l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;l.className='em';
+  s.replaceWith(l);
+});
+</script>
 </body>
 </html>

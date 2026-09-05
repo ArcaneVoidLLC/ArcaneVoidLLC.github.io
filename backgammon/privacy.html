@@ -18,9 +18,11 @@
     </svg>
     <span class="name">Arcane Void · Backgammon</span>
     <nav>
+      <a href="/backgammon/">Overview</a>
+      <a href="/backgammon/verify.html">Verify</a>
+      <a href="/backgammon/support.html">Support</a>
       <a href="/backgammon/privacy.html">Privacy</a>
       <a href="/backgammon/terms.html">Terms</a>
-      <a href="/backgammon/support.html">Support</a>
     </nav>
   </div>
 </header>
@@ -103,7 +105,7 @@
     <p>If either edition starts collecting or transmitting anything not described here, we will update this page and change the effective date above <em>before</em> that change reaches you, and we will say plainly what is collected, by whom, and why.</p>
 
     <h2>12. Contact</h2>
-    <p>Questions about this policy: <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>. Arcane Void LLC.</p>
+    <p>Questions about this policy: <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>. Arcane Void LLC.</p>
   </div>
 </main>
 <footer>
@@ -111,9 +113,11 @@
     <div class="cols">
       <div>
         <h4>Backgammon</h4>
+        <a href="/backgammon/">Overview</a>
+        <a href="/backgammon/verify.html">Verify your dice</a>
+        <a href="/backgammon/support.html">Support</a>
         <a href="/backgammon/privacy.html">Privacy Policy</a>
         <a href="/backgammon/terms.html">Terms of Use</a>
-        <a href="/backgammon/support.html">Support</a>
       </div>
       <div>
         <h4>Company</h4>
@@ -123,11 +127,20 @@
       </div>
       <div>
         <h4>Contact</h4>
-        <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>
+        <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>
       </div>
     </div>
     <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
   </div>
 </footer>
+<script>
+/* Addresses are assembled here rather than written into the page, so
+   scrapers reading the HTML do not get them. */
+document.querySelectorAll('span.em').forEach(function(s){
+  var a=s.dataset.u+'@'+s.dataset.d+'.'+s.dataset.t;
+  var l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;l.className='em';
+  s.replaceWith(l);
+});
+</script>
 </body>
 </html>

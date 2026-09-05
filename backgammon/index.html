@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backgammon by Arcane Void — a strong opponent and dice you can check</title>
+<meta name="description" content="Backgammon for Android with an opponent whose strength is measured, dice that are sealed before the first throw and provable after the last, the doubling cube, match play and analysis of every move. Plays offline, no account, no coins.">
+<link rel="canonical" href="https://arcanevoid.com/backgammon/">
+<link rel="icon" href="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="stylesheet" href="/style.css">
+<meta property="og:title" content="Backgammon by Arcane Void">
+<meta property="og:description" content="A strong opponent, dice you can check, the cube and match play, and analysis of every move. On your device, offline, no coins.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://arcanevoid.com/backgammon/">
+<meta property="og:image" content="https://arcanevoid.com/backgammon/media/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arcanevoid.com/backgammon/media/og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Backgammon",
+  "url": "https://arcanevoid.com/backgammon/",
+  "image": "https://arcanevoid.com/backgammon/media/og.png",
+  "description": "Backgammon against an opponent whose strength is measured, with dice that are sealed before the first throw and provable after the last, the doubling cube, match play and analysis of every move. Plays offline with no account.",
+  "operatingSystem": "Android",
+  "applicationCategory": "GameApplication",
+  "applicationSubCategory": "Board game",
+  "screenshot": [
+    "https://arcanevoid.com/backgammon/media/game.webp",
+    "https://arcanevoid.com/backgammon/media/dice.webp",
+    "https://arcanevoid.com/backgammon/media/home.webp",
+    "https://arcanevoid.com/backgammon/media/lesson.webp",
+    "https://arcanevoid.com/backgammon/media/two.webp"
+  ],
+  "publisher": { "@type": "Organization", "name": "Arcane Void LLC", "url": "https://arcanevoid.com/" }
+}
+</script>
+<style>
+  main{padding-top:44px}
+  .hero{display:grid;gap:34px;align-items:center;margin-bottom:26px}
+  @media (min-width:860px){.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+  .wrap.wide{width:min(1040px,92vw)}
+  h1{font-size:clamp(2.1rem,5.4vw,3.3rem);line-height:1.05;margin-bottom:16px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .hero .lede{font-size:1.1rem;max-width:50ch}
+  .badge{
+    display:inline-flex;align-items:center;gap:9px;margin:26px 0 0;padding:9px 16px;border-radius:999px;
+    background:var(--panel);border:1px solid var(--line);font-size:.86rem;color:var(--ink);font-weight:600;
+  }
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(201,184,255,.18)}
+  .shot{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.55)}
+  .lead-in{display:flex;flex-wrap:wrap;gap:12px 36px;margin:30px 0 0;padding:26px 0 0;border-top:1px solid var(--line);list-style:none}
+  .lead-in li{color:var(--muted);font-size:.9rem;margin:0}
+  .lead-in b{display:block;color:var(--ink);font-size:1.35rem;font-weight:600;letter-spacing:-.02em;margin-bottom:2px}
+  section{margin-top:74px}
+  section h2{font-size:clamp(1.35rem,2.6vw,1.75rem);letter-spacing:-.02em;margin:0 0 14px}
+  .kicker{display:block;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#5d5872;font-weight:600;margin-bottom:12px}
+  .two{display:grid;gap:30px;align-items:center}
+  @media (min-width:860px){.two{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}.two.flip>figure{order:-1}}
+  .two p{max-width:56ch}
+  figure{margin:0}
+  figcaption{font-size:.8rem;color:#5d5872;margin-top:10px}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:18px 0 0}
+  ol.steps li{position:relative;padding-left:44px;margin-bottom:14px;color:var(--muted)}
+  ol.steps li::before{
+    counter-increment:s;content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;
+    border:1px solid var(--accent);color:var(--accent);font-size:.82rem;font-weight:600;display:grid;place-items:center;
+  }
+  .grid{display:grid;gap:18px;margin-top:22px}
+  @media (min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+  .card h3{margin:0 0 6px;font-size:1rem}
+  .card p{margin:0;font-size:.94rem}
+  .cta{display:inline-block;margin-top:18px;padding:11px 22px;border-radius:999px;background:var(--accent);color:#120d1f;font-weight:600;text-decoration:none;font-size:.94rem}
+  .cta:hover{filter:brightness(1.06)}
+  .editions{display:grid;gap:18px;margin-top:22px}
+  @media (min-width:700px){.editions{grid-template-columns:1fr 1fr}}
+  .editions .card ul{margin:12px 0 0;padding-left:1.1em}
+  .editions .card li{font-size:.94rem}
+  .editions .pro{border-color:#3d3560;background:linear-gradient(180deg,#151226,var(--panel))}
+  .editions .price{color:var(--muted);font-size:.86rem;margin:10px 0 0}
+  .nots{columns:2;column-gap:40px;margin-top:14px;padding-left:1.1em}
+  @media (max-width:640px){.nots{columns:1}}
+  .nots li{break-inside:avoid}
+  .contact{margin-top:74px;padding:26px 28px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+  .contact h2{margin-top:0}
+  .contact .em{font-weight:600;font-size:1.05rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap wide">
+    <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#c9b8ff" stroke-width="7"/>
+      <circle cx="50" cy="50" r="7" fill="#c9b8ff"/>
+    </svg>
+    <span class="name">Arcane Void · Backgammon</span>
+    <nav>
+      <a href="/backgammon/">Overview</a>
+      <a href="/backgammon/verify.html">Verify</a>
+      <a href="/backgammon/support.html">Support</a>
+      <a href="/backgammon/privacy.html">Privacy</a>
+      <a href="/backgammon/terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap wide">
+
+    <div class="hero">
+      <div>
+        <h1>Backgammon with dice <em>you can check</em>.</h1>
+        <p class="lede">An opponent whose strength is measured, not advertised. Dice sealed before the first throw and proven after the last. The doubling cube, match play, and an honest account of every move you made. On your device, offline, with no coins to buy.</p>
+        <span class="badge"><span class="dot"></span>Android — coming soon to Google Play</span>
+      </div>
+      <figure>
+        <img class="shot" src="/backgammon/media/game.webp" width="1400" height="630" alt="A game in progress on the walnut board: the player has rolled 5-2, movable checkers are ringed in gold, pip counts read 167 each" fetchpriority="high">
+      </figure>
+    </div>
+
+    <ul class="lead-in">
+      <li><b>12</b>opponents, from Coach to VOID</li>
+      <li><b>0</b>coins, boosters, timers or wagers</li>
+      <li><b>Every roll</b>recomputable from a seed you hold</li>
+      <li><b>Every move</b>scored against the engine's best</li>
+    </ul>
+
+    <section id="dice">
+      <span class="kicker">The dice</span>
+      <h2>Fixed before you play. Provable after.</h2>
+      <div class="two">
+        <div>
+          <p>Every backgammon app is accused of rigging its dice, and every developer answers “they are random”, which convinces nobody. We took a different route: the dice are committed to before the game and the commitment is handed to you. When the game ends, the seed is revealed, and the application recomputes every throw in front of you.</p>
+          <ol class="steps">
+            <li>Before you spin, the app draws a 32-byte seed from the device's secure random source and shows you its seal.</li>
+            <li>You spin a dial. Your movement becomes a salt. The app cannot pick a seed knowing your spin, and you cannot pick a spin knowing the seed.</li>
+            <li>Before the first roll the app shows the commitment: SHA-256 of seed and salt together. Every throw of the game is now fixed. The opponent program is handed each roll when you are, and never the seed.</li>
+            <li>When the game ends the seed is revealed. The app recomputes every throw and shows a ledger; you can do the same with a <a href="/backgammon/verify.html">page on this site</a>, a <a href="/backgammon/verify_dice.py">short script</a>, or any SHA-256 tool.</li>
+          </ol>
+          <p>Beside the ledger sit the dice statistics for both sides: doubles, pips per roll, and how much the dice helped or hurt each player, with what a fair die gives over that many rolls. A run of doubles against you stops being an accusation and becomes a number.</p>
+          <a class="cta" href="/backgammon/verify.html">Verify a game</a>
+        </div>
+        <figure>
+          <img class="shot" src="/backgammon/media/dice.webp" width="1400" height="630" loading="lazy" alt="The Verifiable dice sheet: the app seed sealed before your spin, your spin as a salt, and the commitment before the first roll, each as a hex fingerprint">
+          <figcaption>The seal, your spin and the commitment, shown before the first roll of a game against Truffle.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="opponent">
+      <span class="kicker">The opponent</span>
+      <h2>Strength that is measured, not advertised.</h2>
+      <div class="two flip">
+        <div>
+          <p>The opponent is our own engine, written for this application. It runs on your device, allocates nothing, and is never shown the dice, the seed or a roll that has not happened yet. One engine plays every level, scores every move and produces every analysis. Lower levels choose worse moves, never worse dice.</p>
+          <p>Twelve opponents sit at the table, from Coach at level 0 to VOID at level 11. Each carries the error rate it makes per move, measured offline against GNU Backgammon, and the band that error rate earns on GNU Backgammon's scale. Truffle is honestly awful. Viper and VOID are Godlike, and VOID runs the engine's deepest search. Pick the one that beats you about half the time, and move up when it stops.</p>
+          <p>A level describes the program's play, not yours. Your own error rate is on your card during every game.</p>
+        </div>
+        <figure>
+          <img class="shot" src="/backgammon/media/home.webp" width="1400" height="630" loading="lazy" alt="The home screen: twelve opponent cards from Coach at level 0 to VOID at level 11, each with an animal avatar, and buttons for Match to 3, New game, Two players and Continue game">
+          <figcaption>Every opponent has a name, a face and a measured error rate.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="learn">
+      <span class="kicker">Learning</span>
+      <h2>Coach teaches at the board.</h2>
+      <div class="two">
+        <div>
+          <p>Level 0 is Coach: nine short lessons played on the real board with scripted dice, one rule each. Moving, hitting, the bar, blocked points, doubles, doubling, taking, bearing off, gammon. Coach says what the position asks for, and a Hint plaque draws the engine's best play as arrows whenever you want it.</p>
+          <p>Coach cannot lose on purpose, but tries hard not to win. Hints show the engine's best play and never change how Coach plays.</p>
+          <p>Every checker that can move is ringed in gold. Pick one up and the rings jump to the points it can reach, each labelled with the die that gets it there. Drag, or tap a checker and then its target. Undo within the turn, and confirm the turn before it is submitted if you prefer.</p>
+        </div>
+        <figure>
+          <img class="shot" src="/backgammon/media/lesson.webp" width="1400" height="630" loading="lazy" alt="Lesson 1 of 9 on the green casino board: Coach's plaque reads 'You rolled 3-1. Make your 5-point', and the checkers that can move are ringed in gold">
+          <figcaption>Lesson one, on the casino baize. Four board finishes ship: walnut, casino, ebony and ivory, oak and navy.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="play">
+      <span class="kicker">The game</span>
+      <h2>The whole game, done right.</h2>
+      <div class="grid">
+        <div class="card"><h3>The cube</h3><p>Double, take or pass, with the Jacoby rule in money games. The engine doubles when it should and declines what it should, and the cube sits on the bar, never over the board or the pip count.</p></div>
+        <div class="card"><h3>Match play</h3><p>Matches to 3, 5, 7 or 11 points with the Crawford rule. The score carries from game to game, and “Next game” picks up where the last one left off.</p></div>
+        <div class="card"><h3>Resignation and scoring</h3><p>Resign as a single game, a gammon or a backgammon. The opponent declines an offer below what the position is worth, and gammons and backgammons score as they must.</p></div>
+        <div class="card"><h3>Analysis</h3><p>After the game: the equity each of your decisions lost, your error rate and its band, and a verdict that separates luck from skill. “Outrolled by 0.4 points, outplayed by 0.1” is the sentence that ends most arguments about dice.</p></div>
+        <div class="card"><h3>Your record</h3><p>Every finished game is kept with its seed, salt, commitment, error rates and dice counts. Twenty achievements, from First blood to Into the void, and a trophy page that also shows the record.</p></div>
+        <div class="card"><h3>Pace</h3><p>Normal, fast or instant animation. Forced turns play themselves if you let them. Point numbers and pip counts on or off. Landscape, so the board is as large as the screen allows.</p></div>
+      </div>
+    </section>
+
+    <section id="two">
+      <span class="kicker">Two players</span>
+      <h2>One screen, two people, the same honest dice.</h2>
+      <div class="two flip">
+        <div>
+          <p>Set the phone or tablet between you. Each side drags or taps its own colour; the board stays put. The dice come from the same committed stream as every other game, every finished turn is still checked and scored by the engine, and Analysis shows both players' error rates afterwards. Whoever loses can verify the dice.</p>
+        </div>
+        <figure>
+          <img class="shot" src="/backgammon/media/two.webp" width="1400" height="630" loading="lazy" alt="Two players mode on the casino board: Player 1 to move with a 1-5, Player 2 waiting, and a Verifiable dice plaque beside Undo">
+        </figure>
+      </div>
+    </section>
+
+    <section id="editions">
+      <span class="kicker">Editions</span>
+      <h2>Free, and Pro once.</h2>
+      <p>Two separate applications on Google Play, built from the same source. Nothing in either edition is sold by the piece: no coins, no boosters, no timers, nothing that touches a position, a roll or a result.</p>
+      <div class="editions">
+        <div class="card">
+          <h3>Backgammon</h3>
+          <p>Free.</p>
+          <ul>
+            <li>Opponents from Coach to Pepper, levels 0 to 6</li>
+            <li>Verifiable dice, the ledger and dice statistics in every game</li>
+            <li>All nine lessons, two-player mode, your error rate on every card</li>
+            <li>Single games, saved and resumed, with the record kept</li>
+          </ul>
+          <p class="price">Shows a banner on the home screen and one video after a finished game, supplied by Google and capped at a PG content rating. Never during play, never in a lesson. Where consent law applies, the app asks before the first advertisement.</p>
+        </div>
+        <div class="card pro">
+          <h3>Backgammon Pro</h3>
+          <p>One purchase through Google Play.</p>
+          <ul>
+            <li>Everything in the free edition</li>
+            <li>Opponents 7 to 11: Stretch, Bamboo, Tusker, Viper and VOID</li>
+            <li>Match play to any length, with the cube</li>
+            <li>Every move analysed, every game</li>
+            <li>No advertising, and no advertising software in the binary</li>
+          </ul>
+          <p class="price">The purchase is tied to your Google account; reinstall from Play on any device you sign into.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="not">
+      <span class="kicker">What it does not do</span>
+      <h2>The list is short because the application is.</h2>
+      <ul class="nots">
+        <li>No account and no sign-in. There is no server of ours to hold one.</li>
+        <li>No analytics, crash reporting or tracking software in either edition.</li>
+        <li>No permission for your location, contacts, files, camera or microphone.</li>
+        <li>No online play, no chat, no content from other players.</li>
+        <li>No wagering, stake, prize or currency. The cube multiplies points and nothing else.</li>
+        <li>Nothing leaves your device except what the free edition's advertising needs, which the <a href="/backgammon/privacy.html">privacy policy</a> lists in full.</li>
+      </ul>
+    </section>
+
+    <section class="contact" id="contact">
+      <h2>Talk to us</h2>
+      <p>Support, a suggestion, a lesson you found confusing, a colour you cannot read, an advertisement that should not have appeared, or a throw the ledger could not verify: one address, read by a person.</p>
+      <p><span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span></p>
+      <p>Before you write, the <a href="/backgammon/support.html">support page</a> answers the usual questions and says what to include so we can answer in one reply.</p>
+    </section>
+
+  </div>
+</main>
+<footer>
+  <div class="wrap wide">
+    <div class="cols">
+      <div>
+        <h4>Backgammon</h4>
+        <a href="/backgammon/">Overview</a>
+        <a href="/backgammon/verify.html">Verify your dice</a>
+        <a href="/backgammon/support.html">Support</a>
+        <a href="/backgammon/privacy.html">Privacy Policy</a>
+        <a href="/backgammon/terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/">Arcane Void</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>
+      </div>
+    </div>
+    <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
+  </div>
+</footer>
+<script>
+/* Addresses are assembled here rather than written into the page, so
+   scrapers reading the HTML do not get them. */
+document.querySelectorAll('span.em').forEach(function(s){
+  var a=s.dataset.u+'@'+s.dataset.d+'.'+s.dataset.t;
+  var l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;l.className='em';
+  s.replaceWith(l);
+});
+</script>
+</body>
+</html>

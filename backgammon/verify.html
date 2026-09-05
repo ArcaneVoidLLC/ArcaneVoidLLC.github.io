@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verify your dice — Backgammon by Arcane Void</title>
+<meta name="description" content="Recompute every roll of a finished game of Backgammon by Arcane Void from the revealed seed, in your browser. Nothing is sent anywhere.">
+<link rel="canonical" href="https://arcanevoid.com/backgammon/verify.html">
+<link rel="icon" href="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="stylesheet" href="/style.css">
+<style>
+  label{display:block;color:var(--ink);font-weight:600;font-size:.92rem;margin:18px 0 6px}
+  label small{color:var(--muted);font-weight:400}
+  input,textarea{
+    width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  textarea{min-height:88px;resize:vertical}
+  input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
+  button{
+    margin-top:22px;background:var(--accent);color:#120d1f;border:0;border-radius:999px;
+    padding:12px 26px;font:600 .95rem ui-sans-serif,system-ui,sans-serif;cursor:pointer;
+  }
+  button:hover{filter:brightness(1.06)}
+  #out{margin-top:30px}
+  .verdict{padding:14px 18px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-weight:600;color:var(--ink)}
+  .verdict.ok{border-color:#2e7d55;color:#8fe0b4}
+  .verdict.bad{border-color:#8c2f2f;color:#ff9c9c}
+  .hash{font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all;color:var(--muted)}
+  .hash b{color:var(--ink);font-weight:600}
+  .ok-t{color:#8fe0b4}.bad-t{color:#ff9c9c}
+  td.mono,th.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;font-size:12.5px;line-height:1.55;color:var(--muted)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#c9b8ff" stroke-width="7"/>
+      <circle cx="50" cy="50" r="7" fill="#c9b8ff"/>
+    </svg>
+    <span class="name">Arcane Void · Backgammon</span>
+    <nav>
+      <a href="/backgammon/">Overview</a>
+      <a href="/backgammon/verify.html">Verify</a>
+      <a href="/backgammon/support.html">Support</a>
+      <a href="/backgammon/privacy.html">Privacy</a>
+      <a href="/backgammon/terms.html">Terms</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <h1>Verify your dice</h1>
+    <p class="lede">Every game's dice are fixed and sealed before the first throw, and the seed is revealed after the last. This page recomputes the seal, the commitment and every roll from that seed. It runs in your browser; nothing you paste leaves it.</p>
+
+    <div class="summary">
+      <p><strong>Where the values are.</strong> In the app, open a finished game and tap the dice badge. The sheet shows the seal (<em>App seed sealed before your spin</em>), the commitment, the revealed seed and salt, and the ledger of every throw. Long-press any value to copy it.</p>
+    </div>
+
+    <form id="f" onsubmit="return false">
+      <label for="seed">Seed and salt <small>— the line under “Seed revealed at the end of the game”: 64 hex digits, a space, 32 hex digits</small></label>
+      <textarea id="seed" spellcheck="false" placeholder="0000000000000000000000000000000000000000000000000000000000000000 00000000000000000000000000000000"></textarea>
+
+      <label for="seal">Seal <small>— optional; the fingerprint shown under the dial before you spun</small></label>
+      <input id="seal" spellcheck="false" autocomplete="off">
+
+      <label for="commit">Commitment <small>— optional; shown before the first roll</small></label>
+      <input id="commit" spellcheck="false" autocomplete="off">
+
+      <label for="rolls">Throws <small>— optional; every throw in order, opening throws first, as 31 or 3-1, separated by spaces</small></label>
+      <textarea id="rolls" spellcheck="false" placeholder="3-1 5-2 6-6 4-1 …"></textarea>
+
+      <button id="go" type="button">Recompute</button>
+    </form>
+
+    <div id="out" aria-live="polite"></div>
+
+    <h2>Doing it without this page</h2>
+    <p>The same computation, as a script you can read in full, is at <a href="/backgammon/verify_dice.py">verify_dice.py</a>. It needs only Python 3:</p>
+<pre>python3 verify_dice.py "SEED SALT" 3-1 5-2 6-6 4-1 …</pre>
+    <p>Or with any SHA-256 tool. The protocol is four lines:</p>
+<pre>seal        = SHA-256(seed ‖ 16 zero bytes)
+commitment  = SHA-256(seed ‖ salt)
+block(t, c) = HMAC-SHA-256(key = seed, msg = salt ‖ u32le(t) ‖ u32le(c))
+roll t      = first two bytes b &lt; 252 of block(t, 0), block(t, 1), …
+              each read as (b mod 6) + 1</pre>
+    <p>Bytes 252 to 255 are skipped so that every face is exactly as likely as every other. Turn <em>t</em> counts from 0 and includes the opening throws, tied ones too.</p>
+
+    <h2>What a match proves</h2>
+    <p>The seal matches: the seed existed before your spin, so the app could not choose it knowing your salt. The commitment matches: seed and salt were fixed before the first roll. Every throw matches: the dice you saw were the only dice that seed and salt can produce. The opponent program is handed each roll at the same moment you are, and is never given the seed.</p>
+    <p>If a throw does not match, keep the game and write to us: that is a defect in the application, and we want it. <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span></p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>Backgammon</h4>
+        <a href="/backgammon/">Overview</a>
+        <a href="/backgammon/verify.html">Verify your dice</a>
+        <a href="/backgammon/support.html">Support</a>
+        <a href="/backgammon/privacy.html">Privacy Policy</a>
+        <a href="/backgammon/terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="/">Arcane Void</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Use</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>
+      </div>
+    </div>
+    <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
+  </div>
+</footer>
+<script src="/backgammon/fairdice.js"></script>
+<script>
+document.querySelectorAll('span.em').forEach(function(s){
+  var a=s.dataset.u+'@'+s.dataset.d+'.'+s.dataset.t;
+  var l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;l.className='em';
+  s.replaceWith(l);
+});
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+function run(){
+  var out=document.getElementById('out');
+  var hexes=[], bad=[];
+  document.getElementById('seed').value.replace(/,/g,' ').split(/\s+/).forEach(function(p){
+    if(!p) return;
+    if(/^[0-9a-fA-F]{32,}$/.test(p)) hexes.push(p.toLowerCase()); else bad.push(p);
+  });
+  if(hexes.length<2||hexes[0].length!==64||hexes[1].length!==32){
+    out.innerHTML='<div class="verdict bad">Paste the seed (64 hex digits) and the salt (32 hex digits), separated by a space.</div>';
+    return;
+  }
+  var seed=FairDice.fromHex(hexes[0]), salt=FairDice.fromHex(hexes[1]);
+  var wantSeal=document.getElementById('seal').value.trim().toLowerCase();
+  var wantCommit=document.getElementById('commit').value.trim().toLowerCase();
+  var rolls;
+  try{ rolls=FairDice.parseRolls(document.getElementById('rolls').value); }
+  catch(e){ out.innerHTML='<div class="verdict bad">'+esc(e.message)+'</div>'; return; }
+
+  var s=FairDice.seal(seed), c=FairDice.commitment(seed,salt);
+  var ok=true, html='';
+  function line(label,val,want){
+    var r='<div class="hash"><b>'+label+'</b><br>'+val;
+    if(want){ var m=val===want; ok=ok&&m; r+=m?' <span class="ok-t">match</span>':' <span class="bad-t">does not match what you entered</span>'; }
+    return r+'</div>';
+  }
+  var body=line('Seal',s,wantSeal)+line('Commitment',c,wantCommit);
+  var rows='';
+  if(rolls.length){
+    rows+='<table><tr><th>Turn</th><th class="mono">Shown</th><th class="mono">Recomputed</th><th></th></tr>';
+    rolls.forEach(function(r){
+      var d=FairDice.dice(seed,salt,r.turn);
+      var m=d[0]===r.dice[0]&&d[1]===r.dice[1]; ok=ok&&m;
+      rows+='<tr><td>'+r.turn+'</td><td class="mono">'+r.dice[0]+'-'+r.dice[1]+'</td><td class="mono">'+d[0]+'-'+d[1]+'</td><td class="'+(m?'ok-t':'bad-t')+'">'+(m?'ok':'different')+'</td></tr>';
+    });
+    rows+='</table>';
+  }else{
+    rows+='<p>No throws entered, so here are the first thirty this seed and salt produce, opening throw first. Read them against the ledger in the app.</p><table><tr><th>Turn</th><th class="mono">Dice</th></tr>';
+    for(var t=0;t<30;t++){ var d=FairDice.dice(seed,salt,t); rows+='<tr><td>'+t+'</td><td class="mono">'+d[0]+'-'+d[1]+'</td></tr>'; }
+    rows+='</table>';
+  }
+  var checked=(wantSeal?1:0)+(wantCommit?1:0)+rolls.length;
+  var verdict= checked===0 ? 'Recomputed. Enter the seal, the commitment or the throws to compare them.'
+             : ok ? 'Everything you entered matches this seed and salt.' : 'Something does not match. See below.';
+  html='<div class="verdict '+(checked===0?'':(ok?'ok':'bad'))+'">'+verdict+'</div><div style="height:16px"></div>'+body+'<div style="height:16px"></div>'+rows;
+  if(bad.length) html+='<p class="hash">Ignored in the seed field: '+esc(bad.join(' '))+'</p>';
+  out.innerHTML=html;
+}
+document.getElementById('go').addEventListener('click',run);
+</script>
+</body>
+</html>

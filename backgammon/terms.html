@@ -18,9 +18,11 @@
     </svg>
     <span class="name">Arcane Void · Backgammon</span>
     <nav>
+      <a href="/backgammon/">Overview</a>
+      <a href="/backgammon/verify.html">Verify</a>
+      <a href="/backgammon/support.html">Support</a>
       <a href="/backgammon/privacy.html">Privacy</a>
       <a href="/backgammon/terms.html">Terms</a>
-      <a href="/backgammon/support.html">Support</a>
     </nav>
   </div>
 </header>
@@ -85,7 +87,7 @@
     <p>We may revise these terms. When we do, we will change the effective date above. Continuing to use the Software after a revision means you accept it.</p>
 
     <h2>14. Contact</h2>
-    <p>Questions about these terms: <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>.</p>
+    <p>Questions about these terms: <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>.</p>
   </div>
 </main>
 <footer>
@@ -93,9 +95,11 @@
     <div class="cols">
       <div>
         <h4>Backgammon</h4>
+        <a href="/backgammon/">Overview</a>
+        <a href="/backgammon/verify.html">Verify your dice</a>
+        <a href="/backgammon/support.html">Support</a>
         <a href="/backgammon/privacy.html">Privacy Policy</a>
         <a href="/backgammon/terms.html">Terms of Use</a>
-        <a href="/backgammon/support.html">Support</a>
       </div>
       <div>
         <h4>Company</h4>
@@ -105,11 +109,20 @@
       </div>
       <div>
         <h4>Contact</h4>
-        <a href="mailto:hello@arcanevoid.com">hello@arcanevoid.com</a>
+        <span class="em" data-u="backgammon" data-d="arcanevoid" data-t="com">backgammon [at] arcanevoid [dot] com</span>
       </div>
     </div>
     <p class="legal">Copyright MMXXVI ARCANE VOID LLC. All rights reserved.</p>
   </div>
 </footer>
+<script>
+/* Addresses are assembled here rather than written into the page, so
+   scrapers reading the HTML do not get them. */
+document.querySelectorAll('span.em').forEach(function(s){
+  var a=s.dataset.u+'@'+s.dataset.d+'.'+s.dataset.t;
+  var l=document.createElement('a');l.href='mailto:'+a;l.textContent=a;l.className='em';
+  s.replaceWith(l);
+});
+</script>
 </body>
 </html>
